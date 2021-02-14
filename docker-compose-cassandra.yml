@@ -1,0 +1,9 @@
+version: '3.7'
+services:
+  cassandra:
+    image: cassandra:4.0
+    container_name: jb-blog-cassandra-db
+    volumes:
+      - /docker/volumes/jb-blog-db/var/lib/cassandra:/var/lib/cassandra
+    ports:
+      - 9042:9042
