@@ -1,0 +1,5 @@
+obj
+bin
+.ionide
+Properties/launchSettings.json
+appsettings.Development.json
