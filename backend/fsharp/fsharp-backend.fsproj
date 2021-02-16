@@ -8,6 +8,7 @@
     <Compile Include="WeatherForecast.fs" />
     <Compile Include="Controllers/WeatherForecastController.fs" />
     <Compile Include="Controllers/UsersController.fs" />
+    <Compile Include="Controllers/PlayWithFsharpController.fs" />
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
