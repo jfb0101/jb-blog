@@ -9,11 +9,9 @@ module GetUser =
         let stm = session.Prepare("select id,name from user where id = ?").Bind(userId)
         let rs = session.Execute(stm)
 
-        let users = rs.Select(fun row -> {
+        let user = rs.First() |> (fun row -> {
             Id = row.GetValue("id");
             Name = row.GetValue("name")
         })
-
-        let user = users.First()
 
         user
