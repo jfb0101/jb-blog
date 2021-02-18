@@ -6,9 +6,20 @@
 
   <ItemGroup>
     <Compile Include="WeatherForecast.fs" />
+    
+    <Compile Include="Models/User.fs" />
+    <Compile Include="Models/Post.fs" />
+
+    <Compile Include="DB/getCassandraSession.fs" />
+
+    <Compile Include="UseCases/Post/CreatePost.fs"/>
+    <Compile Include="UseCases/User/GetUser.fs"/>
+
     <Compile Include="Controllers/WeatherForecastController.fs" />
     <Compile Include="Controllers/UsersController.fs" />
     <Compile Include="Controllers/PlayWithFsharpController.fs" />
+    <Compile Include="Controllers/PostController.fs" />
+    
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

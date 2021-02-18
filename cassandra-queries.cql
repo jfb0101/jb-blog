@@ -1,13 +1,16 @@
 use jb_blog;
 
-create table post (
-    post_id text,
+-- describe table post;
+
+-- drop table post;
+
+CREATE TABLE post (
+    id text,
+    created_on timestamp,
+    body text,
     post_title text,
-  
+    title text,
     user_id text,
     user_name text,
-
-    created_on timestamp,
-
-    primary key ((post_id),created_on)
+    PRIMARY KEY (id)
 );

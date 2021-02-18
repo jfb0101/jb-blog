@@ -2,3 +2,5 @@ obj
 bin
 Properties/launchSettings.json
 appsettings.Development.json
+.fake
+.ionide
