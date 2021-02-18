@@ -1,5 +1,13 @@
-use my_keyspace;
+use jb_blog;
 
--- describe keyspace my_keyspace;
+create table post (
+    post_id text,
+    post_title text,
+  
+    user_id text,
+    user_name text,
 
-select * from user;
+    created_on timestamp,
+
+    primary key ((post_id),created_on)
+);
