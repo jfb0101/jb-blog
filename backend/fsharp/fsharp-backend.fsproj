@@ -17,10 +17,10 @@
     <Compile Include="DB/getRedisClient.fs" />
     <Compile Include="DB/RowToObj/UserRowToObj.fs" />
 
-    <Compile Include="UseCases/UseCaseResult.fs" />
     <Compile Include="UseCases/User/GetUser.fs" />
     <Compile Include="UseCases/User/CreateUser.fs" />
     <Compile Include="UseCases/User/Login.fs" />
+    <Compile Include="UseCases/User/GetTokenStatus.fs" />
 
     <Compile Include="UseCases/Post/CreatePost.fs" />
 

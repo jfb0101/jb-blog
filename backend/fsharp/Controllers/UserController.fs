@@ -41,5 +41,13 @@ type UserController () =
             | Error(Login.NotSavedOnRedis) -> "Falha ao persistir no redis"
             | Success(token) -> token
             
+    [<HttpGet>]
+    [<Route("ValidateToken")>]
+    member _.ValidateToken(token:string) = 
+        let redisClient = getRedisClient()
 
+        match GetTokenStatus.``$`` redisClient token with
+            | Success(GetTokenStatus.Valid) -> "token válido"
+            | Success(GetTokenStatus.NotFound) -> "token não encontrado"
+            | _ -> "erro"
         

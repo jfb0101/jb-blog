@@ -22,15 +22,9 @@ module Login =
 
     let saveTokenInRedis (redisClient:IRedisClient) token email = 
 
-        let saveToken token = 
-
-            match redisClient.Set(token,email) with
-                | true -> Success()
-                | false -> Error(NotSavedOnRedis)
-
-
-        saveToken token
-            
+        match redisClient.Set(token,email) with
+            | true -> Success()
+            | false -> Error(NotSavedOnRedis)            
 
 
     let ``$`` (session:ISession) (redisClient:IRedisClient) (email:string) (password:string) : Result<string,LoginError> = 

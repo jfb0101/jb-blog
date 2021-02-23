@@ -2,6 +2,5 @@
 
 open FsharpBackend.UseCases.User
 
-let md5 = CreateUser.getMd5 "1234"
+let redisClient = FsharpBackend.DB.Redis.getRedisClient()
 
-printfn $"{md5}"
