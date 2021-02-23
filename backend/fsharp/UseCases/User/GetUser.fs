@@ -11,7 +11,8 @@ module GetUser =
 
         let user = rs.First() |> (fun row -> {
             Id = row.GetValue("id");
-            Name = row.GetValue("name")
+            Name = row.GetValue("name");
+            Password = null
         })
 
         user

@@ -12,11 +12,13 @@
 
     <Compile Include="DB/getCassandraSession.fs" />
 
+    <Compile Include="UseCases/UseCaseResult.fs"/>
     <Compile Include="UseCases/Post/CreatePost.fs"/>
     <Compile Include="UseCases/User/GetUser.fs"/>
+    <Compile Include="UseCases/User/CreateUser.fs"/>
 
     <Compile Include="Controllers/WeatherForecastController.fs" />
-    <Compile Include="Controllers/UsersController.fs" />
+    <Compile Include="Controllers/UserController.fs" />
     <Compile Include="Controllers/PlayWithFsharpController.fs" />
     <Compile Include="Controllers/PostController.fs" />
     
