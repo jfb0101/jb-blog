@@ -34,6 +34,15 @@ end
 
 
 defmodule FunctionMaker do
+
+
+  defmacro __using__(_opts) do
+    quote do
+      import FunctionMaker
+    end
+  end
+
+  
   defmacro create_multiplier(function_name,factor) do
     quote do
       def unquote(function_name)(value) do
@@ -41,6 +50,7 @@ defmodule FunctionMaker do
       end
     end
   end
+
 
   defmacro create_functions(planemo_list) do
     Enum.map planemo_list, fn {name,gravity} ->
@@ -55,14 +65,14 @@ defmodule FunctionMaker do
 end
 
 defmodule Multiply do
-  require FunctionMaker
+  use FunctionMaker
 
-  FunctionMaker.create_multiplier(:double,2)
-  FunctionMaker.create_multiplier(:triple,3)
+  create_multiplier :double, 2
+  # FunctionMaker.create_multiplier :triple, 3
 
   def example do
-    x = triple(12)
-    IO.puts("12 x 3 is #{x}")
+    x = double(12)
+    IO.puts("12 x 2 is #{x}")
   end
 end
 
