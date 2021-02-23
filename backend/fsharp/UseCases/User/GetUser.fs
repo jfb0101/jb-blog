@@ -3,16 +3,14 @@ open Cassandra
 
 open System.Linq;
 open FsharpBackend.Models
+open FsharpBackend.DB.RowToObj
 
 module GetUser =
-    let ``$`` (session:ISession) (userId:string) : User  =
-        let stm = session.Prepare("select id,name from user where id = ?").Bind(userId)
+    let ``$`` (session:ISession) (userId:string) : User option  =
+        let stm = session.Prepare("select id,name,email from user where id = ?").Bind(userId)
         let rs = session.Execute(stm)
 
-        let user = rs.First() |> (fun row -> {
-            Id = row.GetValue("id");
-            Name = row.GetValue("name");
-            Password = null
-        })
+        rs.First() |> UserRowToObj.``$``
+            
+            
 
-        user

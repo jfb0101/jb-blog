@@ -8,6 +8,8 @@ open FsharpBackend.Models
 open FsharpBackend.DB.Cassandra
 open FsharpBackend.UseCases.User
 open FsharpBackend.UseCases
+open FsharpBackend.UseCases.User
+open System
 
 [<ApiController>]
 [<Route("[controller]")>]
@@ -20,7 +22,16 @@ type UserController () =
         let result = CreateUser.``$`` session user
 
         match result with
-            | (Success, _) -> $"usuario criado"
-            | (Error, erro) -> $"falha ao criar usuario"
+            | (Success) -> $"usuario criado"
+            | (Error) -> $"falha ao criar usuario"
+
+    [<HttpPost>]
+    [<Route("Login")>]
+    member _.LoginAction([<FromForm>] email:string, [<FromForm>] password:string) =
+        Console.WriteLine($"email: {email}, password: {password}")
+        let session = getCassandraSession()
+        match Login.``$`` session email password with
+            | None -> "usuario ou senha invalidos"
+            | Some(token) -> token
 
         

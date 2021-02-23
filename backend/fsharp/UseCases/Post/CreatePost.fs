@@ -1,6 +1,7 @@
 namespace FsharpBackend.UseCases.Post
 open Cassandra
 open FsharpBackend.Models
+open FsharpBackend.UseCases
 
 open System
 
@@ -17,3 +18,5 @@ module CreatePost =
                         user.Name,
                         DateTime.Now)
         session.Execute(stm) |> ignore
+
+        (Success)

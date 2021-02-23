@@ -7,6 +7,7 @@ open System
 open FsharpBackend.UseCases.User
 open FsharpBackend.UseCases.Post
 open FsharpBackend.DB.Cassandra
+open FsharpBackend.UseCases
 
 type CreateContract =
     {userId:string; post: Post}
@@ -24,4 +25,8 @@ type PostsController () =
 
         let user = GetUser.``$`` session data.userId
 
-        CreatePost.``$`` session data.post user
+        match user with
+            | Some(_user) -> CreatePost.``$`` session data.post _user
+            | None -> (Error)
+
+        
