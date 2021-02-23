@@ -10,6 +10,7 @@
     <Compile Include="Models/User.fs" />
     <Compile Include="Models/Post.fs" />
 
+    <Compile Include="Utils/Result.fs" />
     <Compile Include="Utils/Security/GetStringMD5.fs" />
 
     <Compile Include="DB/getCassandraSession.fs" />
