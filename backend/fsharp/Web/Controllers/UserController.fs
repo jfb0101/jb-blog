@@ -12,6 +12,7 @@ open FsharpBackend.UseCases.User
 open System
 open FsharpBackend.DB.Redis
 open FsharpBackend
+open FsharpBackend.Web.Security
 
 [<ApiController>]
 [<Route("[controller]")>]
@@ -43,6 +44,7 @@ type UserController () =
             
     [<HttpGet>]
     [<Route("ValidateToken")>]
+    
     member _.ValidateToken(token:string) = 
         let redisClient = getRedisClient()
 

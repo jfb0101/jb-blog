@@ -24,10 +24,14 @@
 
     <Compile Include="UseCases/Post/CreatePost.fs" />
 
-    <Compile Include="Controllers/WeatherForecastController.fs" />
-    <Compile Include="Controllers/UserController.fs" />
-    <Compile Include="Controllers/PlayWithFsharpController.fs" />
-    <Compile Include="Controllers/PostController.fs" />
+    <Compile Include="Web/Security/BlogAuth.fs" />
+    <Compile Include="Web/Middleware/BlogAuthMiddleware.fs" />
+    
+
+    <Compile Include="Web/Controllers/WeatherForecastController.fs" />
+    <Compile Include="Web/Controllers/UserController.fs" />
+    <Compile Include="Web/Controllers/PlayWithFsharpController.fs" />
+    <Compile Include="Web/Controllers/PostController.fs" />
     
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />

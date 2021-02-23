@@ -20,4 +20,4 @@ module CreatePost =
                         DateTime.Now)
         session.Execute(stm) |> ignore
 
-        Success(post)
+        Success({post with Id = id})

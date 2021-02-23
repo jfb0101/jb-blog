@@ -11,6 +11,20 @@ open Microsoft.AspNetCore.Mvc
 open Microsoft.Extensions.Configuration
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
+open Microsoft.AspNetCore.Http
+open System.Reflection
+open FsharpBackend.Web.Security
+open System.Linq
+open Microsoft.AspNetCore.Mvc.Controllers
+open FsharpBackend.UseCases.User
+open FsharpBackend.DB.Redis
+open FsharpBackend
+open FsharpBackend.Middleware
+
+
+            
+            
+
 
 type Startup(configuration: IConfiguration) =
     member _.Configuration = configuration
@@ -27,6 +41,7 @@ type Startup(configuration: IConfiguration) =
         app.UseHttpsRedirection()
            .UseRouting()
            .UseAuthorization()
+           .UseMiddleware<BlogAuthMiddleware>()
            .UseEndpoints(fun endpoints ->
                 endpoints.MapControllers() |> ignore
             ) |> ignore

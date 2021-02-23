@@ -10,4 +10,7 @@ module UserRowToObj =
                     {Id = row.GetValue("id");
                     Name = row.GetValue("name");
                     Email = row.GetValue("email");
-                    Password = row.GetValue("password")})
+                    Password = try 
+                                    row.GetValue("password")
+                                with 
+                                    | _ -> ""})
