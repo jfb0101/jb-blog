@@ -10,17 +10,18 @@
     <Compile Include="Models/User.fs" />
     <Compile Include="Models/Post.fs" />
 
-    <Compile Include="Utils/Security/GetStringMD5.fs"/>
+    <Compile Include="Utils/Security/GetStringMD5.fs" />
 
     <Compile Include="DB/getCassandraSession.fs" />
+    <Compile Include="DB/getRedisClient.fs" />
     <Compile Include="DB/RowToObj/UserRowToObj.fs" />
 
-    <Compile Include="UseCases/UseCaseResult.fs"/>
-    <Compile Include="UseCases/User/GetUser.fs"/>
-    <Compile Include="UseCases/User/CreateUser.fs"/>
-    <Compile Include="UseCases/User/Login.fs"/>
+    <Compile Include="UseCases/UseCaseResult.fs" />
+    <Compile Include="UseCases/User/GetUser.fs" />
+    <Compile Include="UseCases/User/CreateUser.fs" />
+    <Compile Include="UseCases/User/Login.fs" />
 
-    <Compile Include="UseCases/Post/CreatePost.fs"/>
+    <Compile Include="UseCases/Post/CreatePost.fs" />
 
     <Compile Include="Controllers/WeatherForecastController.fs" />
     <Compile Include="Controllers/UserController.fs" />
@@ -33,6 +34,7 @@
 
   <ItemGroup>
     <PackageReference Include="CassandraCSharpDriver" Version="3.16.2" />
+    <PackageReference Include="ServiceStack.Redis" Version="5.10.4" />
   </ItemGroup>
 
 </Project>

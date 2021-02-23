@@ -30,8 +30,9 @@ type UserController () =
     member _.LoginAction([<FromForm>] email:string, [<FromForm>] password:string) =
         Console.WriteLine($"email: {email}, password: {password}")
         let session = getCassandraSession()
+
         match Login.``$`` session email password with
-            | None -> "usuario ou senha invalidos"
-            | Some(token) -> token
+            | (Error) -> "usuario ou senha invalidos"
+            | (Success) -> "sucesso"
 
         
