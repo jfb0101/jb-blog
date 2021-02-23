@@ -21,6 +21,8 @@ defmodule ElixirBackendWeb.Router do
     get "/user", PageController, :user
 
     get "/user2", PageController, :user2
+
+    get "/post", PostController, :get_post
   end
 
   # Other scopes may use custom stacks.
