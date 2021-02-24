@@ -26,13 +26,12 @@ type BlogAuthMiddleware(next: RequestDelegate) =
                                             |> Option.map(fun e -> e.Metadata)
                                             |> Option.map(fun m -> m.GetMetadata<ControllerActionDescriptor>())
 
-        let proceed =   if controllerActionDescriptor.IsNone then true
-                        elif methodHasBlogAuthAttribute controllerActionDescriptor.Value.MethodInfo then
-                            tokenIsValid (context.Request.Headers.["Authorization"].ToString())
-                        else true     
+        let authorized =   if controllerActionDescriptor.IsNone then true
+                            elif methodHasBlogAuthAttribute controllerActionDescriptor.Value.MethodInfo then
+                                tokenIsValid (context.Request.Headers.["Authorization"].ToString())
+                            else true     
 
-        if proceed then next.Invoke(context) 
+        if authorized then next.Invoke(context) 
         else
-            printfn "nao continuar"
             context.Response.StatusCode <- 403
-            context.Response.WriteAsync("não autorizado")
+            context.Response.WriteAsync("not authorized")

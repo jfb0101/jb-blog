@@ -26,14 +26,17 @@ type PostsController () =
     [<BlogAuth>]
     member this.Create ([<FromBody>] data:CreateContract) : IActionResult  =
         
-        let session = getCassandraSession()
+        use session = getCassandraSession()
 
         let user = GetUser.``$`` session data.userId
 
-        match user with
-            | Some(_user) -> match CreatePost.``$`` session data.post _user with
-                                | Success(post) -> this.Ok(post) :> IActionResult
-                                | Error(e) -> this.BadRequest(e) :> IActionResult
-            | None -> this.BadRequest() :> IActionResult
+        if user.IsNone then this.NotFound("User not found") :> IActionResult
+        else
+            match CreatePost.``$`` session data.post user.Value with
+                | Success(post) -> this.Ok(post) :> IActionResult
+                | Error(e) -> this.BadRequest(e) :> IActionResult
+
+
+        
 
         

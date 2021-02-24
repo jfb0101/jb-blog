@@ -20,36 +20,35 @@ type UserController () =
     inherit ControllerBase()
 
     [<HttpPost>]
-    member _.Create([<FromBody>] user: User) =
-        let session = getCassandraSession()
+    member this.Create([<FromBody>] user: User) : IActionResult =
+        use session = getCassandraSession()
         let result = CreateUser.``$`` session user
 
         match result with
-            | Success() -> $"usuario criado"
-            | Error() -> $"falha ao criar usuario"
+            | Success(user) -> this.Ok(user) :> IActionResult
+            | Error(e) -> this.Problem(e) :> IActionResult
 
     [<HttpPost>]
     [<Route("Login")>]
-    member _.LoginAction([<FromForm>] email:string, [<FromForm>] password:string) =
-        Console.WriteLine($"email: {email}, password: {password}")
+    member this.LoginAction([<FromForm>] email:string, [<FromForm>] password:string) : IActionResult =
 
-        let session = getCassandraSession()
-        let redisClient = getRedisClient()
+        use session = getCassandraSession()
+        use redisClient = getRedisClient()
 
         match Login.``$`` session redisClient email password with
-            | Error(Login.EmailNotFound) -> "Email não encontrado"
-            | Error(Login.WrongPassword) -> "Senha inválida"
-            | Error(Login.NotSavedOnRedis) -> "Falha ao persistir no redis"
-            | Success(token) -> token
+            | Error(Login.EmailNotFound) | Error(Login.WrongPassword) -> this.BadRequest("Email or password wrong") :> IActionResult
+            | Error(Login.ErrorPersistingToken) -> this.Problem("System error") :> IActionResult
+            | Success(token) -> this.Ok(token) :> IActionResult
             
     [<HttpGet>]
     [<Route("ValidateToken")>]
     
-    member _.ValidateToken(token:string) = 
-        let redisClient = getRedisClient()
+    member this.ValidateToken(token:string) = 
+        use redisClient = getRedisClient()
 
         match GetTokenStatus.``$`` redisClient token with
-            | Success(GetTokenStatus.Valid) -> "token válido"
-            | Success(GetTokenStatus.NotFound) -> "token não encontrado"
-            | _ -> "erro"
+            | Success(GetTokenStatus.Valid) -> this.Ok() :> IActionResult
+            | Success(GetTokenStatus.NotFound) -> this.BadRequest() :> IActionResult
+            | Error(e)  -> this.Problem(e) :> IActionResult
+            | _ -> this.Problem() :> IActionResult
         

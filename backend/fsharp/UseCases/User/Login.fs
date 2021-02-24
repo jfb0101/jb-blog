@@ -16,7 +16,7 @@ module Login =
     type LoginError = 
         | EmailNotFound
         | WrongPassword
-        | NotSavedOnRedis
+        | ErrorPersistingToken
 
     let md5Match (passwordInMD5:string) (informedPassword:string) = (GetStringMD5.``$`` informedPassword)  = passwordInMD5
 
@@ -24,19 +24,19 @@ module Login =
 
         match redisClient.Set(token,email) with
             | true -> Success()
-            | false -> Error(NotSavedOnRedis)            
+            | false -> Error(ErrorPersistingToken)            
 
 
     let ``$`` (session:ISession) (redisClient:IRedisClient) (email:string) (password:string) : Result<string,LoginError> = 
         let stm = session.Prepare("select id,name,email,password from user where email = ?").Bind(email)
         let rs = session.Execute(stm)
 
-        let user' = rs.First() |> UserRowToObj.``$``
+        let user = rs.First() |> UserRowToObj.``$``
 
-        if user'.IsNone then Error(EmailNotFound)
+        if user.IsNone then Error(EmailNotFound)
         
         else 
-            if not (md5Match user'.Value.Password password) then Error(WrongPassword)
+            if not (md5Match user.Value.Password password) then Error(WrongPassword)
             
             else
                 let token = Guid.NewGuid().ToString()
