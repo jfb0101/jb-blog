@@ -16,7 +16,7 @@ open FsharpBackend.Web.Security
 
 [<ApiController>]
 [<Route("[controller]")>]
-type UserController () = 
+type UsersController () = 
     inherit ControllerBase()
 
     [<HttpPost>]

@@ -28,10 +28,8 @@
     <Compile Include="Web/Middleware/BlogAuthMiddleware.fs" />
     
 
-    <Compile Include="Web/Controllers/WeatherForecastController.fs" />
-    <Compile Include="Web/Controllers/UserController.fs" />
-    <Compile Include="Web/Controllers/PlayWithFsharpController.fs" />
-    <Compile Include="Web/Controllers/PostController.fs" />
+    <Compile Include="Web/Controllers/UsersController.fs" />
+    <Compile Include="Web/Controllers/PostsController.fs" />
     
     <Compile Include="Startup.fs" />
     <Compile Include="Program.fs" />
