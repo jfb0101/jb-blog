@@ -1,3 +1,3 @@
 use jb_blog;
 
-create index on user (email);
+select * from user;
