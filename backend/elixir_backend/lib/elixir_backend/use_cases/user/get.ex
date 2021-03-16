@@ -21,13 +21,13 @@ defmodule ElixirBackend.UseCases.User.Get do
       ]
     ]
 
-    [query,params] = case params do
+    [query,queryParams] = case params do
       %Params{id: id} when id != nil -> search[:by_id]
       %Params{email: email} when email != nil -> search[:by_email]
     end
 
     {:ok,prepared} = Xandra.prepare(conn,query)
-    {:ok, %Xandra.Page{} = page} = Xandra.execute(conn,prepared,params)
+    {:ok, %Xandra.Page{} = page} = Xandra.execute(conn,prepared,queryParams)
 
     page
   end

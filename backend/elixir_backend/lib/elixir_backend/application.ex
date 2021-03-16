@@ -8,7 +8,7 @@ defmodule ElixirBackend.Application do
   def start(_type, _args) do
     children = [
       # Start the Ecto repository
-      # ElixirBackend.Repo,
+      
       # Start the Telemetry supervisor
       ElixirBackendWeb.Telemetry,
       # Start the PubSub system

@@ -7,8 +7,7 @@
 # General application configuration
 use Mix.Config
 
-config :elixir_backend,
-  ecto_repos: [ElixirBackend.Repo]
+
 
 # Configures the endpoint
 config :elixir_backend, ElixirBackendWeb.Endpoint,

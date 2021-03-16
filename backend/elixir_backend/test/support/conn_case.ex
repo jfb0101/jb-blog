@@ -31,12 +31,8 @@ defmodule ElixirBackendWeb.ConnCase do
     end
   end
 
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(ElixirBackend.Repo)
+  setup _tags do
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(ElixirBackend.Repo, {:shared, self()})
-    end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
