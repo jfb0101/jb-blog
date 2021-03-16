@@ -1,14 +1,14 @@
 
-defmodule ElixirBackend.UseCases.User.Get.Params do
+defmodule ElixirBackend.UseCases.User.Get.Input do
   defstruct email: :nil, id: :nil
 end
 
 defmodule ElixirBackend.UseCases.User.Get do
 
   alias ElixirBackend.DB.Cassandra
-  alias ElixirBackend.UseCases.User.Get.Params
+  alias ElixirBackend.UseCases.User.Get.Input
 
-  def call(%ElixirBackend.UseCases.User.Get.Params{} = params) do
+  def call(%Input{} = params) do
     conn = Cassandra.GetCassandraConnection.call()
 
     search = [
@@ -22,8 +22,8 @@ defmodule ElixirBackend.UseCases.User.Get do
     ]
 
     [query,queryParams] = case params do
-      %Params{id: id} when id != nil -> search[:by_id]
-      %Params{email: email} when email != nil -> search[:by_email]
+      %Input{id: id} when id != nil -> search[:by_id]
+      %Input{email: email} when email != nil -> search[:by_email]
     end
 
     {:ok,prepared} = Xandra.prepare(conn,query)
