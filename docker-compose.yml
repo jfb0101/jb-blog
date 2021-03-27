@@ -8,3 +8,8 @@ services:
       - /docker/volumes/jb-blog-db/cassandra.yaml:/etc/cassandra/cassandra.yaml
     ports:
       - 9042:9042
+  redis: 
+    image: redis:6
+    ports:
+      - 6379:6379
+    container_name: jb-blog-redis

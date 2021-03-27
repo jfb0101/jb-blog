@@ -30,6 +30,9 @@ defmodule ElixirBackend.UseCases.User.Get do
     {:ok, %Xandra.Page{} = page} = Xandra.execute(conn,prepared,queryParams)
 
     page
+    |> Enum.to_list()
+    |> List.first()
+    |> Map.drop(["password"])
   end
 
 

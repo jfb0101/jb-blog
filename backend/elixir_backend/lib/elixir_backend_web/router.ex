@@ -23,6 +23,14 @@ defmodule ElixirBackendWeb.Router do
     get "/user2", PageController, :user2
 
     get "/post", PostController, :get_post
+
+    get "/calc/sum", CalcController, :sum
+  end
+
+  scope "/api", ElixirBackendWeb do
+    pipe_through :api
+
+    post "/user/login", UserController, :login
   end
 
   # Other scopes may use custom stacks.
