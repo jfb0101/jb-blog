@@ -13,6 +13,6 @@ defmodule ElixirBackend.DB.Cassandra.GetCassandraConnection do
     conn
   end
 
-
+  defdelegate getDbConn, to: __MODULE__, as: :call
 
 end
